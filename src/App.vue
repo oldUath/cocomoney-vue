@@ -1,11 +1,16 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <!--  主题内容在router-view里  -->
+    <router-view></router-view>
+    <hr>
+    <!-- 底部导航栏   -->
+    <router-link to="/money">记账</router-link>
+    |
+    <router-link to="/labels">标签</router-link>
+    |
+    <router-link to="/statistics">统计</router-link>
   </div>
+
 </template>
 
 <style lang="scss">
@@ -29,4 +34,5 @@
     }
   }
 }
+
 </style>
