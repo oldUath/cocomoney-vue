@@ -1,10 +1,14 @@
 <template>
-  <div> labels.vue</div>
+  <div>
+    labels.vue
+    <hr>
+    <Nav></Nav>
+  </div>
 </template>
 
 <script>
 export default {
-name: "Labels"
+name: "Labels",
 }
 </script>
 <style scoped>
