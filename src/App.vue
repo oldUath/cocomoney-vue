@@ -2,13 +2,15 @@
   <div>
     <!--  主题内容在router-view里  -->
     <router-view></router-view>
-    <hr>
-
   </div>
-
 </template>
 
 <style lang="scss">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
