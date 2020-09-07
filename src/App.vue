@@ -11,6 +11,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+a{
+  text-decoration: none;
+  //颜色继承
+  color: inherit;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
