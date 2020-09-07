@@ -11,8 +11,6 @@ module.exports = {
             .test(/\.svg$/)//以svg结尾的文件但是只包含icons的目录
             .include.add(dir).end()
             .use('svg-sprite-loader').loader('svg-sprite-loader').options({extract: false}).end()
-            .use('svgo-loader').loader('svgo-loader')
-            .tap(options=>({...options,plugins:[{removeAttrs:{attrs:'fill'}}]})).end()
         config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
         config.module.rule('svg').exclude.add(dir)//排除其他svg文件
     }

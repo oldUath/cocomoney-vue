@@ -7,9 +7,9 @@
 <script lang="ts">
 // import  x from '@/assets/icons/label.svg'
 //加载全部的svg
-const importAll = (requireContext: __WeboacjNidykeAoi.RequireContext)=>requireContext.keys().forEach(requireContext);
+const importAll = (RequireContext: __WebpackModuleApi.RequireContext) => RequireContext.keys().forEach(RequireContext);
 try {
-  importAll(require.context('../assets/icons'),true,/\.svg$/);
+  importAll(require.context('../assets/icons',true,/\.svg$/));
 }catch (error){
   console.log(error)
 }
