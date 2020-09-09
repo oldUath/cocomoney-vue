@@ -4,3 +4,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+a{
+  text-decoration: none;
+  //颜色继承
+  color: inherit;
+}
+ul,ol{
+  list-style: none;
+}
+:focus{
+  outline: none;
+}

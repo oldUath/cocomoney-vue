@@ -17,11 +17,7 @@ body{
   line-height: 1.5;
   font-family: $font-hei;
 }
-a{
-  text-decoration: none;
-  //颜色继承
-  color: inherit;
-}
+
 
 
 </style>
