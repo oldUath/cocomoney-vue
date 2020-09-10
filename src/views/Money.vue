@@ -4,7 +4,7 @@
      <NumberPad />
 
 <!--支出收入按钮-->
-      <Types xxx="hai"/>
+      <Types :xxx="  333 "/>
 <!--备注-->
       <Notes />
 <!--衣食住行-->
