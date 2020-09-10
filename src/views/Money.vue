@@ -2,9 +2,8 @@
     <Layout class-prefix="layout">
 <!--      数字输入面板-->
      <NumberPad />
-
 <!--支出收入按钮-->
-      <Types :xxx="  333 "/>
+      <Types />
 <!--备注-->
       <Notes />
 <!--衣食住行-->
@@ -28,7 +27,6 @@ export default {
 <style lang="scss">
 
 .layout-content{
-  border: 3px solid red;
   display: flex;
   flex-direction: column-reverse;
 }

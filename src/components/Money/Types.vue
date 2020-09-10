@@ -7,23 +7,13 @@
     </ul>
   </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-
-@Component({
-  props: {
-    propMessage: String
-  }
-})
+@Component
 export default class Type extends Vue {
   type = '-'; //-号是支出，+号是收入
-  @Prop(Number) xxx: number | undefined;
-  // xxx是属性名，@Prop是告诉vue这个属性不是一个data数据而是prop
-  // @Prop(Number)是告诉vue这个xxx是个Number类型
-  // number | undefined;就是告诉TS   xxx的类型
-
-
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
