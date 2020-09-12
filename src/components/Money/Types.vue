@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 @Component
 export default class Type extends Vue {
   type = '-'; //-号是支出，+号是收入
@@ -19,6 +19,11 @@ export default class Type extends Vue {
       throw new Error('type is unknown');
     }
     this.type = type;
+  }
+  @Watch('type')
+  onTypeChanged(value: string){
+    this.$emit('update:value',this.type)
+
   }
 
 }

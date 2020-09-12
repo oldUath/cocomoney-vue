@@ -28,6 +28,7 @@ export default class Tags extends Vue{
     }else {
       this.selectedTags.push(tag)
     }
+    this.$emit('update:value',this.selectedTags)
   }
 //  新增标签
   create(){
@@ -39,6 +40,7 @@ export default class Tags extends Vue{
           [...this.dataSource,name]);
     }
   }
+
 }
 </script>
 
