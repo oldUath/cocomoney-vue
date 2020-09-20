@@ -5,7 +5,9 @@
 <!--支出收入按钮-->
       <Types :value="record.type" @update:value="onUpdateType"/>
 <!--备注-->
-      <Notes @update:value="onUpdateNotes" />
+      <Notes field-name="备注"
+             placeholder="在这里输入备注"
+             @update:value="onUpdateNotes" />
 <!--衣食住行-->
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
 {{recordList}}
