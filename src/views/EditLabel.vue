@@ -3,7 +3,7 @@
     <div class="navBar">
       <Icon class="lefeIcon" name="left"></Icon>
       <span class="title">编辑标签页面</span>
-      <spaan class="right"></spaan>
+      <span class="right"></span>
     </div>
     <div class="form-wrapper">
       <FormItem field-name="标签名"
@@ -51,11 +51,9 @@ export default class EditerLabel extends Vue {
   align-items: center;
   justify-content: space-between;
   > .title{
-    border: 1px solid red;
 
   }
   > .lefeIcon{
-    border: 1px solid red;
     width: 24px;
     height: 24px;
   }

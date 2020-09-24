@@ -13,7 +13,7 @@
 
 <!--衣食住行-->
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
-{{recordList}}
+{{record}}
     </Layout>
 </template>
 
