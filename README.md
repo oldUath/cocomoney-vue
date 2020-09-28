@@ -5,25 +5,13 @@
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development运行
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+## 2020.9.28新增了删除功能和返回功能
+ **新建的组件点击事件要传递到标签上面**
 ```
-yarn build
+<button class="button" @click="$emit('click',$event)">
 ```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
