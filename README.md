@@ -4,8 +4,9 @@
 ```
 yarn install
 ```
+## 使用 yarn命令
 
-### Compiles and hot-reloads for development运行
+### 运行程序
 ```
 yarn serve
 ```
