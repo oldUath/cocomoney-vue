@@ -16,3 +16,9 @@ yarn serve
 ```
 <button class="button" @click="$emit('click',$event)">
 ```
+
+### 添加id生成器 
+即使是刷新也会获取id的最大值，若没有则从0l开始
+```
+let id:number = parseInt(window.localStorage.getItem('_idMax') || '0' ) || 0;
+```
