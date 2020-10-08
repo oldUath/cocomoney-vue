@@ -60,13 +60,12 @@ export default class Money extends  Vue{
   saveRecord(){
     //进行深拷贝,如果直接把record给push他们的值永远是一样的，因为push的是地址
     const record2: RecordItem=recordListModel.clone(this.record);
-
     record2.createdAt=new Date();
     this.recordList.push(record2);
   }
 @Watch('recordList')
   onRecordListChange(){
-  recordListModel.save(this.recordList);
+  recordListModel.save();
   }
 
 }

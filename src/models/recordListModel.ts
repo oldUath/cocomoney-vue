@@ -1,9 +1,13 @@
+import clone from '@/lib/clone';
+
 const localStorageKeyName = 'recordList';
 const recordListModel = {
     //强制的类型断言，使data是一个RecordItem类型的数组
    data:[] as RecordItem[] ,
-    clone(data: RecordItem[] | RecordItem){
-        return JSON.parse(JSON.stringify(data));
+    create(record: RecordItem){
+        const record2: RecordItem=clone(record);
+        record2.createdAt=new Date();
+        this.data.push(record2);
     },
     fetch() {
         this.data = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[] ;
