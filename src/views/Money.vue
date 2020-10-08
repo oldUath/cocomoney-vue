@@ -21,23 +21,17 @@
 import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import Types from '@/components/Money/Types.vue';
-import Notes from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
-import {Component, Watch} from 'vue-property-decorator';
-import recordListModel from '@/models/recordListModel';
-import tagListModel from '@/models/tagListModel';
+import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 
 
-const recordList=recordListModel.fetch();
-const tagList = tagListModel.fetch();
-
 @Component({
-  components: {FormItem, Tags, Notes, Types, NumberPad}
+  components: {FormItem, Tags,  Types, NumberPad}
 })
 export default class Money extends  Vue{
   tags=window.tagList;
-  recordList: RecordItem[]=recordList;
+  recordList=window.recordList;
   //数据类型初始值，记录Money页面的数据
   record: RecordItem={
     tags:[],notes:'',type:'-',amount:0
@@ -58,15 +52,13 @@ export default class Money extends  Vue{
 
   }
   saveRecord(){
-    //进行深拷贝,如果直接把record给push他们的值永远是一样的，因为push的是地址
-    const record2: RecordItem=recordListModel.clone(this.record);
-    record2.createdAt=new Date();
-    this.recordList.push(record2);
+    // //进行深拷贝,如果直接把record给push他们的值永远是一样的，因为push的是地址
+    // const record2: RecordItem=recordListModel.clone(this.record);
+    // record2.createdAt=new Date();
+    // this.recordList.push(record2);
+    window.createRecord(this.record);
   }
-@Watch('recordList')
-  onRecordListChange(){
-  recordListModel.save();
-  }
+
 
 }
 </script>
