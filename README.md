@@ -22,3 +22,10 @@ yarn serve
 ```
 let id:number = parseInt(window.localStorage.getItem('_idMax') || '0' ) || 0;
 ```
+
+## 新增全局数据管理
+解决bug,新增标签但是记账首页没有显示的问题
+解决方法就是在他们的上一层（main.js）新建一个全局的数据，后面获取数据直接从这获取
+```javascript
+  tags=window.tagList;
+```
