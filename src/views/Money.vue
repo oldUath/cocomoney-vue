@@ -28,10 +28,15 @@ import store from '@/store/index2';
 
 
 @Component({
-  components: {FormItem, Tags,  Types, NumberPad}
+  components: {FormItem, Tags,  Types, NumberPad},
+  computed:{
+    recordList(){
+      return store.recordList;
+    }
+  }
 })
 export default class Money extends  Vue{
-  recordList=store.recordList;
+
   //数据类型初始值，记录Money页面的数据
   record: RecordItem={
     tags:[],notes:'',type:'-',amount:0

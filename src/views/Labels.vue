@@ -19,9 +19,7 @@ import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
 import store from '@/store/index2';
-import recordStore from '@/store/recordStore';
 
-recordStore.fetchRecords();
 @Component({
   components: {Button}
 })
