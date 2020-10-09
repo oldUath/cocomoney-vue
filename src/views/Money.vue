@@ -1,6 +1,6 @@
 <template>
     <Layout class-prefix="layout">
-<!--      数字输入面板-->
+<!--字输入面板-->
      <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" />
 <!--支出收入按钮-->
       <Types :value="record.type" @update:value="onUpdateType"/>
@@ -12,7 +12,7 @@
       </div>
 
 <!--衣食住行-->
-      <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+      <Tags />
 {{record}}
     </Layout>
 </template>
@@ -31,15 +31,12 @@ import store from '@/store/index2';
   components: {FormItem, Tags,  Types, NumberPad}
 })
 export default class Money extends  Vue{
-  tags=store.tagList;
   recordList=store.recordList;
   //数据类型初始值，记录Money页面的数据
   record: RecordItem={
     tags:[],notes:'',type:'-',amount:0
   }
-  onUpdateTags(value: string[]){
-    this.record.tags=value
-  }
+
   onUpdateNotes(value: string){
     this.record.notes=value
 
