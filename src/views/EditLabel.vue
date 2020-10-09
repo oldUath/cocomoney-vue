@@ -36,7 +36,7 @@ export default class EditerLabel extends Vue {
     if (!this.tag){
       this.$router.replace('/404');
     }
-    }
+  }
 
   update(name: string) {
     if (this.tag) {
