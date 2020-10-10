@@ -2,7 +2,7 @@
   <!--衣食住行-->
   <div class="tags">
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
@@ -15,6 +15,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
+import {mixins} from 'vue-class-component';
+import TagHelper from '@/mixins/TagHelper';
 @Component({
   computed:{
     tagList(){
@@ -22,7 +24,7 @@ import {Component} from 'vue-property-decorator';
     }
   }
 })
-export default class Tags extends Vue{
+export default class Tags extends mixins(TagHelper){
   //选中的标签数组
   selectedTags: string[]=[];
   created(){
@@ -37,14 +39,8 @@ export default class Tags extends Vue{
     }
     this.$emit('update:value',this.selectedTags)
   }
-//  新增标签
-  create(){
-    const name=prompt("请输入标签名：")
-    if(!name){
-      return window.alert("不能输入空的标签名");
-    }
-    this.$store.commit('createTag',name);
-  }
+//  新增标签方法在mixin里面
+
 }
 </script>
 
