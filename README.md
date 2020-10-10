@@ -75,5 +75,15 @@ this.$store.commit('方法名', 参数);
 
 ```
 
+没有办法直接获取到commit的返回值，需要用的set方法获取
+  首先在组件里先set
+```
+set tag(){
+
+}
+```
+  再在index.ts里的state里声明一个变量
+  最后再使用 store.state.变量获取
+https://class-component.vuejs.org/guide/class-component.html#computed-properties
 
 
