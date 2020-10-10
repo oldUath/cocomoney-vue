@@ -2,30 +2,32 @@
   <!--支出收入按钮-->
   <div>
     <ul class="types">
-      <li :class="type === '-' && 'selected' " @click="selectType('-')">支出</li>
-      <li :class="type === '+' && 'selected' " @click="selectType('+')">收入</li>
+      <li :class="{[classPrefix+'-item']:classPrefix,selected:value === '-'}"
+          @click="selectType('-')">支出
+      </li>
+      <li :class="{[classPrefix+'-item']:classPrefix,selected:value === '+'}"
+          @click="selectType('+')">收入
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
+
 @Component
 export default class Type extends Vue {
+  // !是绝对不会为undefined，？是可能会是
+  @Prop(String) readonly value!: string;
+  @Prop(String) classPrefix?: string;
   type = '-'; //-号是支出，+号是收入
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     }
-    this.type = type;
+    this.$emit('update:value',type);
   }
-  @Watch('type')
-  onTypeChanged(value: string){
-    this.$emit('update:value',this.type)
-
-  }
-
 }
 
 </script>

@@ -3,7 +3,7 @@
 <!--字输入面板-->
      <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" />
 <!--支出收入按钮-->
-      <Types :value="record.type" @update:value="onUpdateType"/>
+      <Types :value.sync="record.type"/>
 <!--备注-->
       <div class="notes">
         <FormItem field-name="备注"
