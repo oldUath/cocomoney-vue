@@ -43,7 +43,6 @@ export default class Tags extends Vue{
     if(!name){
       return window.alert("不能输入空的标签名");
     }
-    // TODO
     this.$store.commit('createTag',name);
   }
 }
