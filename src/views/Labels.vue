@@ -23,13 +23,11 @@ import {mixins} from 'vue-class-component';
 
 @Component({
   components: {Button},
-  computed:{
-    tags(){
-      return this.$store.state.tagList;
-    }
-  }
 })
 export  default  class Labels extends mixins(TagHelper){
+  get tags(){
+    return this.$store.state.tagList;
+  }
   beforeCreate(){
     this.$store.commit('fetchTags');
   }
