@@ -13,7 +13,6 @@
 
 <!--衣食住行-->
       <Tags />
-{{record}}
     </Layout>
 </template>
 
@@ -24,22 +23,24 @@ import Types from '@/components/Money/Types.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
-import store from '@/store/index2';
+import store from '@/store/index';
 
 
 @Component({
   components: {FormItem, Tags,  Types, NumberPad},
   computed:{
     recordList(){
-      return store.recordList;
+      return this.$store.state.recordList;
     }
   }
 })
 export default class Money extends  Vue{
-
   //数据类型初始值，记录Money页面的数据
   record: RecordItem={
     tags:[],notes:'',type:'-',amount:0
+  };
+  created(){
+    this.$store.commit('fetchRecords')
   }
 
   onUpdateNotes(value: string){
@@ -55,11 +56,7 @@ export default class Money extends  Vue{
 
   }
   saveRecord(){
-    // //进行深拷贝,如果直接把record给push他们的值永远是一样的，因为push的是地址
-    // const record2: RecordItem=recordListModel.clone(this.record);
-    // record2.createdAt=new Date();
-    // this.recordList.push(record2);
-    store.createRecord(this.record);
+    this.$store.commit('createRecord',this.record);
   }
 
 

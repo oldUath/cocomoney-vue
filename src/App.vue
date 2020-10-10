@@ -4,17 +4,7 @@
     <router-view></router-view>
   </div>
 </template>
-<script lang="js">
-  import store from "@/store/index2";
 
-  export default {
-    data(){
-      return{
-        store:store
-      }
-    }
-  }
-</script>
 <style lang="scss">
 //引入scss文件
 @import "~@/assets/style/helper.scss";
