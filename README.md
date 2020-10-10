@@ -83,6 +83,7 @@ set tag(){
 }
 ```
   再在index.ts里的state里声明一个变量
+  
   最后再使用 store.state.变量获取
 https://class-component.vuejs.org/guide/class-component.html#computed-properties
 
