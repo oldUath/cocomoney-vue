@@ -3,7 +3,8 @@
 <!--字输入面板-->
      <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" />
 <!--支出收入按钮-->
-      <Types :value.sync="record.type"/>
+      <Tabs :data-source="recordTypeList"
+            :value.sync="record.type"></Tabs>
 <!--备注-->
       <div class="notes">
         <FormItem field-name="备注"
@@ -19,17 +20,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
-import Types from '@/components/Money/Types.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
-import store from '@/store/index';
-
+import Tabs from '@/components/Tabs.vue';
+import recordTypeList from '@/constant/recordTypeList';
 @Component({
-  components: {FormItem, Tags,  Types, NumberPad},
-
+  components: {FormItem, Tags, Tabs, NumberPad},
 })
 export default class Money extends  Vue{
+  recordTypeList=recordTypeList;
+
   get recordList(){
     return this.$store.state.recordList;
   }
