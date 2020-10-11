@@ -1,7 +1,6 @@
 <template>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
-      <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" />
       <div>
         <ol >
           <li v-for="(group,index) in groupedList" :key="index">
@@ -33,8 +32,6 @@ import clone from '@/lib/clone';
 })
 export default class Statistics extends Vue {
   type = '-';
-  interval = 'day';
-  intervalList = intervalList;
   recordTypeList = recordTypeList;
 
   beautify(string: string){
