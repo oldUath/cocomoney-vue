@@ -6,7 +6,7 @@ type RootState={
 }
 
 type RecordItem = {
-    tags: string[];
+    tags: Tag[];
     notes: string;
     type: string;
     amount: number;
