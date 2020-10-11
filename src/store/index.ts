@@ -6,11 +6,6 @@ import router from '@/router';
 
 Vue.use(Vuex)
 
-type RootState={
-  recordList: RecordItem[];
-  tagList: Tag[];
-  currentTag?: Tag;
-}
 const store = new Vuex.Store({
   state: {
     recordList:[] ,
@@ -61,7 +56,8 @@ const store = new Vuex.Store({
     },
     createRecord(state,record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createdAt = new Date();
+      //JSON不支持Data类型的，要把它转化为ISOstring
+      record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords')
       console.log(state.recordList);

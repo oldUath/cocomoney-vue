@@ -3,9 +3,18 @@
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
       <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" />
       <div>
-        type:{{type}}
-        <br>
-        interval:{{interval}}
+        <ol >
+          <li v-for="(group,index) in result" :key="index">
+            <h3 class="title">{{group.title}}</h3>
+            <ol>
+              <li class="record" v-for="item in group.items" :key="item.id">
+                <span>{{tagString(item.tags)}} </span>
+                <span class="notes">{{item.notes}}</span>
+                <span><span>￥</span>{{item.amount}}</span>
+              </li>
+            </ol>
+          </li>
+        </ol>
       </div>
     </Layout>
 </template>
@@ -22,9 +31,33 @@ import recordTypeList from '@/constant/recordTypeList';
 })
 export default class Statistics extends Vue {
   type = '-';
-  interval = 'week';
+  interval = 'day';
   intervalList = intervalList;
   recordTypeList = recordTypeList;
+
+  tagString(tags: Tag[]){
+    return tags.length===0 ? '无' : tags.join(',');
+  }
+  get recordList(){
+    return (this.$store.state as RootState).recordList;
+  }
+  get result(){
+    const {recordList} = this;
+    type HashTableValue = {title: string;items: RecordItem[]};
+
+    const hashTable: {[key: string]: HashTableValue} ={};
+    for(let i=0;i<recordList.length;i++){
+      const [data,time] = recordList[i].createdAt!.split('T');
+      hashTable[data] = hashTable[data] || {title:data,items:[]};
+
+      hashTable[data].items.push(recordList[i]);
+    }
+    console.log(hashTable);
+    return hashTable;
+  }
+  beforeCreate(){
+    this.$store.commit('fetchRecords');
+  }
 }
 </script>
 
@@ -40,5 +73,25 @@ export default class Statistics extends Vue {
   }
   ::v-deep .interval-tabs-item{
     height: 48px;
+  }
+  %item {
+    padding: 8px 16px;
+    line-height: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .title{
+    @extend %item;
+    background: #C4C4C4;
+  }
+  .record{
+    background: white;
+    @extend %item;
+  }
+  .notes{
+    margin-right: auto;
+    margin-left: 16px;
+    color:#999;
+
   }
 </style>
