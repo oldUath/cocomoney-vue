@@ -87,4 +87,9 @@ set tag(){
   最后再使用 store.state.变量获取
 https://class-component.vuejs.org/guide/class-component.html#computed-properties
 
+# ES6的新语法
+1.可以在“”里使用[] 括住变量
+```javascript
+:class="{[classPrefix+'-item']:classPrefix,selected:value === '-'}
+```
 
