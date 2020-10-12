@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="lefeIcon" name="left" @click="goBack"></Icon>
+      <Icon class="leftIcon" name="left" @click="goBack"></Icon>
       <span class="title">编辑标签页面</span>
       <span class="right"></span>
     </div>
@@ -75,7 +75,7 @@ export default class EditerLabel extends Vue {
 
   }
 
-  > .lefeIcon {
+  > .leftIcon {
     width: 24px;
     height: 24px;
   }

@@ -11,6 +11,9 @@ export class TagHelper extends Vue {
             return window.alert("不能输入空的标签名");
         }
         this.$store.commit('createTag',name);
+        if(this.$store.state.createTagError){
+            window.alert(this.$store.state.createTagError.message)
+        }
     }
 }
 export default TagHelper;
