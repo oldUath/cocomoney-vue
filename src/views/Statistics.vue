@@ -4,7 +4,7 @@
       <div>
         <ol >
           <li v-for="(group,index) in groupedList" :key="index">
-            <h3 class="title">{{beautify(group.title)}}</h3>
+            <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
             <ol>
               <li class="record" v-for="item in group.items" :key="item.id">
                 <span>{{tagString(item.tags)}} </span>
@@ -22,7 +22,6 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/constant/intervalList';
 import recordTypeList from '@/constant/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
@@ -61,9 +60,12 @@ export default class Statistics extends Vue {
   get groupedList(){
     const {recordList} = this;
     type HashTableValue = {title: string;items: RecordItem[]};
-    const newList = clone(recordList).sort((a,b)=>dayjs(b.createdAt).valueOf()-dayjs(a.createdAt).valueOf());
-    const result = [{title:dayjs(newList[0].createdAt).format('YYYY-MM-DD'),items:[newList[0]]}];
-    for(let i=0;i<newList.length;i++){
+    const newList = clone(recordList)
+        .filter(r=>r.type === this.type)
+        .sort((a,b)=>dayjs(b.createdAt).valueOf()-dayjs(a.createdAt).valueOf());
+    type Result = {title: string;total?: number;items: RecordItem[]}[];
+    const result: Result = [{title:dayjs(newList[0].createdAt).format('YYYY-MM-DD'),items:[newList[0]]}];
+    for(let i=1;i<newList.length;i++){
       const current = newList[i];
       const last = result[result.length-1];
       if(dayjs(last.title).isSame(dayjs(current.createdAt),'day')){
@@ -72,8 +74,13 @@ export default class Statistics extends Vue {
         result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'),items:[current]});
       }
     }
+    result.map(group => {
+      group.total= group.items.reduce((sum,item)=>sum+item.amount,0);
+    })
     return result;
   }
+
+
   beforeCreate(){
     this.$store.commit('fetchRecords');
   }
@@ -82,9 +89,10 @@ export default class Statistics extends Vue {
 
 <style scoped lang="scss">
   ::v-deep .type-tabs-item{
-    background: white;
+    background:#c4c4c4;
     &.selected{
-      background:#c4c4c4;
+
+      background: white;
       &::after{
         display: none;
       }
@@ -101,7 +109,6 @@ export default class Statistics extends Vue {
   }
   .title{
     @extend %item;
-    background: #C0C0C0;
   }
   .record{
     background: white;
