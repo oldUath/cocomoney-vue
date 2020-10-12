@@ -21,3 +21,10 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app');
+
+//手机浏览器自动上滑
+window.onload = function (){
+    setTimeout(function (){
+        window.scroll(0,1000);
+    },3000);
+};

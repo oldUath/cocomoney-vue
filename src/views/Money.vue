@@ -9,11 +9,11 @@
       <div class="notes">
         <FormItem field-name="备注"
                   placeholder="在这里输入备注"
-                  @update:value="onUpdateNotes" />
+                  :value.sync="record.notes" />
       </div>
 
 <!--衣食住行-->
-      <Tags />
+      <Tags @update:value="record.tags = $event" />
     </Layout>
 </template>
 
@@ -44,7 +44,6 @@ export default class Money extends  Vue{
 
   onUpdateNotes(value: string){
     this.record.notes=value
-
   }
   onUpdateType(value: string){
     this.record.type=value
@@ -56,9 +55,11 @@ export default class Money extends  Vue{
   }
   saveRecord(){
     this.$store.commit('createRecord',this.record);
+    if(this.$store.state.createRecordError ===null){
+      window.alert('已保存');
+      this.record.notes = '';
+    }
   }
-
-
 }
 </script>
 

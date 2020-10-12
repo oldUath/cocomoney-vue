@@ -1,6 +1,7 @@
 //定义一种类型
 type RootState={
     recordList: RecordItem[];
+    createRecordError: Error|null;
     tagList: Tag[];
     currentTag?: Tag;
 }
