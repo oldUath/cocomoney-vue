@@ -93,3 +93,5 @@ https://class-component.vuejs.org/guide/class-component.html#computed-properties
 :class="{[classPrefix+'-item']:classPrefix,selected:value === '-'}
 ```
 
+### 统计页面修改bug
+
