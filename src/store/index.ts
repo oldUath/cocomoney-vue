@@ -84,6 +84,7 @@ const store = new Vuex.Store({
         state.createTagError = new Error('tag name duplicated:标签名重复了');
         return;
       }
+      //最好不要使用else
       const id = createId().toString();
       state.tagList.push({id, name: name});
       store.commit('saveTags');
