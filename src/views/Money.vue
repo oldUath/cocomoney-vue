@@ -8,7 +8,7 @@
 <!--备注-->
       <div class="createdAt">
         <FormItem field-name="日期"
-                  type="datetime-local"
+                  type="date"
                   placeholder="在这里输入日期"
                   :value.sync="record.createdAt" />
       </div>
@@ -76,6 +76,6 @@ export default class Money extends  Vue{
   flex-direction: column-reverse;
 }
 .notes{
-  padding: 12px 0;
+  padding: 5px 0 0;
 }
 </style>
