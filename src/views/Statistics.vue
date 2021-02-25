@@ -1,18 +1,19 @@
 <template>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
-        <ol v-if="groupedList.length> 0" >
-          <li v-for="(group,index) in groupedList" :key="index">
-            <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
-            <ol>
-              <li class="record" v-for="item in group.items" :key="item.id">
-                <span>{{tagString(item.tags)}} </span>
-                <span class="notes">{{item.notes}}</span>
-                <span><span>￥</span>{{item.amount}}</span>
-              </li>
-            </ol>
-          </li>
-        </ol>
+      <Chart :options="x" />
+      <ol v-if="groupedList.length> 0" >
+        <li v-for="(group,index) in groupedList" :key="index">
+          <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
+          <ol>
+            <li class="record" v-for="item in group.items" :key="item.id">
+              <span>{{tagString(item.tags)}} </span>
+              <span class="notes">{{item.notes}}</span>
+              <span><span>￥</span>{{item.amount}}</span>
+            </li>
+          </ol>
+        </li>
+      </ol>
         <div class="noResult" v-else>
           目前没有相关记录
         </div>
@@ -26,9 +27,10 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constant/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import Chart from '@/components/Chart.vue'
 
 @Component({
-  components:{Tabs},
+  components:{Tabs,Chart},
 })
 export default class Statistics extends Vue {
   type = '-';
@@ -49,10 +51,29 @@ export default class Statistics extends Vue {
       return day.format('YYYY年MM月DD日');
     }
   }
-
   tagString(tags: Tag[]){
     return tags.length===0 ? '无' : tags.map(t=>t.name).join(',');
   }
+  get x(){
+   return{
+     xAxis: {
+       type: 'category',
+       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+     },
+     yAxis: {
+       type: 'value'
+     },
+     series: [{
+       data: [150, 230, 224, 218, 135, 147, 260],
+       type: 'line'
+     }],
+     tooltip:{
+       show:true
+     },
+   }
+  }
+
+
   get recordList(){
     return (this.$store.state as RootState).recordList;
   }
@@ -88,6 +109,9 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+  .echarts{
+    max-width: 100%;
+  }
   ::v-deep .type-tabs-item{
     background:#c4c4c4;
     &.selected{
