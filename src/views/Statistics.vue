@@ -95,6 +95,7 @@ export default class Statistics extends Vue {
        type: 'value'
      },
      series: [{
+       symbolSize:13,
        data: values,
        type: 'line'
      }],
