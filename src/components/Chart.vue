@@ -10,7 +10,7 @@ import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
   @Component
   export default class Chart extends Vue{
     @Prop() options?: EChartsOption;
-    chart?: ECharts;
+    chart?: any;
     mounted(){
       if(this.options === undefined){
         return console.log('options 为空');
@@ -20,7 +20,7 @@ import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
     }
 
     @Watch('options')
-    onOptionsChange(newValue){
+    onOptionsChange(newValue: any){
       this.chart!.setOption(newValue);
     }
   }
