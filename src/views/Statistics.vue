@@ -85,7 +85,10 @@ export default class Statistics extends Vue {
      },
      xAxis: {
        type: 'category',
-       data: keys
+       data: keys,
+        axisTick: {
+          alignWithLabel: true
+        }
      },
      yAxis: {
        show:false,
