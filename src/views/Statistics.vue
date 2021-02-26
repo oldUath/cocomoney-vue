@@ -1,7 +1,9 @@
 <template>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
-      <Chart :options="x" />
+      <div class="chart-wrapper">
+        <Chart class="chart" :options="x" ref="chartWrapper" />
+      </div>
       <ol v-if="groupedList.length> 0" >
         <li v-for="(group,index) in groupedList" :key="index">
           <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
@@ -28,6 +30,8 @@ import recordTypeList from '@/constant/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
 import Chart from '@/components/Chart.vue'
+import _ from 'lodash'
+import day from 'dayjs'
 
 @Component({
   components:{Tabs,Chart},
@@ -35,6 +39,7 @@ import Chart from '@/components/Chart.vue'
 export default class Statistics extends Vue {
   type = '-';
   recordTypeList = recordTypeList;
+
 
   beautify(string: string){
     const day = dayjs(string);
@@ -54,17 +59,40 @@ export default class Statistics extends Vue {
   tagString(tags: Tag[]){
     return tags.length===0 ? '无' : tags.map(t=>t.name).join(',');
   }
+  mounted(){
+    const div = (this.$refs.chartWrapper as HTMLDivElement) ;
+    div.scrollLeft = div.scrollWidth;
+  }
   get x(){
+    const today = new Date();
+    const array = []
+    for (let i=0;i<=29;i++){
+      const date = day(today).subtract(i,'day').format('YYYY-MM-DD');
+      const found =_.find(this.groupedList,{
+        title:date
+      });
+      array.push({
+        date:date ,value:found ? found.total:0
+      });
+    }
+    const keys = array.map(item=>item.date);
+    const values = array.map(item=>item.value);
+    console.log(this.groupedList)
    return{
+     grid: {
+       left: 0,
+       right: 0,
+     },
      xAxis: {
        type: 'category',
-       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+       data: keys
      },
      yAxis: {
+       show:false,
        type: 'value'
      },
      series: [{
-       data: [150, 230, 224, 218, 135, 147, 260],
+       data: values,
        type: 'line'
      }],
      tooltip:{
@@ -146,5 +174,11 @@ export default class Statistics extends Vue {
   .noResult{
     padding: 28px;
     text-align: center;
+  }
+  .chart{
+    width: 400%;
+    &-wrapper{
+      overflow: auto;
+    }
   }
 </style>
